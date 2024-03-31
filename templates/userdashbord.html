@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+ {% block title %}
+ <title>user</title>
+ {% endblock %}
+
+
+ {% block block_body %}
+ <center>
+    {% if user %}
+    <h1>Wellcome To  Mr/Ms {{username}}</h1>
+    <h1>Your Role Is User</h1>
+    {% endif %}
+ </center>
+ {% endblock %}
