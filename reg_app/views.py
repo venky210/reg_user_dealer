@@ -4,9 +4,9 @@ from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from reg_app.views import *
 from reg_app.forms import *
 from reg_app.models import *
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse
-
+from django.contrib.auth.decorators import login_required
 
 def homepage(request):
     if request.session.get('username'):
@@ -66,3 +66,7 @@ def loginpage(request):
 
 
 
+@login_required
+def logoutpage(request):
+    logout(request)
+    return render(request,'homepage.html')

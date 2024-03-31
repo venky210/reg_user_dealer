@@ -24,4 +24,5 @@ urlpatterns = [
     path('loginpage/',loginpage,name='loginpage'),
     path('userdashbord/',userdashbord,name='userdashbord'),
     path('dealerdashbord/',dealerdashbord,name='dealerdashbord'),
+    path('logoutpage/',logoutpage,name='logoutpage'),
 ]
