@@ -9,10 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 def homepage(request):
-    if request.session.get('username'):
-        un=request.session.get('username')
-        d={'username':un}
-        return render(request,'homepage.html',d)
+   
     return render(request,'homepage.html')
 
 def Registration(request):
