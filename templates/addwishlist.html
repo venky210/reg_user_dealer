@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Add_Wishlist</title>
+{% endblock %}
+
+{% block block_body %}
+<center>
+    <i><h1 style="color: aqua;">ADD WISHLIST</h1></i>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{add.as_p}}
+        <input type="submit" value="AddWishList">
+    </form>
+</center>
+
+{% endblock %}

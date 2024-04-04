@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Display WishList</title>
+
+{% endblock %}
+
+{% block block_body %}
+<center>
+    <i><h1>All WishList Products</h1></i>
+</center>
+{% for iteam in products %}
+ {{iteam.Product.pname}}
+ {% endfor %}
+{% endblock %}

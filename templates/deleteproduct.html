@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block tilte %}
+<title>Delete_Product</title>
+{% endblock %}
+
+{% block block_body %}
+<center>
+    <h1>Delete Product</h1>
+    
+    <h1>Are you sure you want to delete</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{pro.as_p}}
+        <input type="submit" value="Delete">
+</center>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   <title>Create_Product</title>
+
+{% endblock %}
+
+
+{% block block_body %}
+<center>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <br>
+        
+        {{form.as_p}}
+        <input type="submit" value="Create">
+
+        
+       
+    </form>
+</center>
+{% endblock %}
+

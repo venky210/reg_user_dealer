@@ -9,3 +9,24 @@ class CustomUserCreationForm(forms.ModelForm):
         help_texts={'username':''}
        
        
+class ProductCreationForm(forms.ModelForm):
+    class Meta:
+        model=product
+        fields=['pname','qty','price','img']
+
+
+class UpdateCreationForm(forms.ModelForm):
+    class Meta:
+        model=product
+        fields=['pname','qty','price']
+
+class DeleteCreationForm(forms.ModelForm):
+    class Meta:
+        model=product
+        fields=['pname']
+
+
+class WishlistForm(forms.ModelForm):
+    class Meta:
+        model=Wishlist
+        fields=['products','qty']
