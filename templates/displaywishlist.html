@@ -10,6 +10,12 @@
     <i><h1>All WishList Products</h1></i>
 </center>
 {% for iteam in products %}
- {{iteam.Product.pname}}
+<label for="" style="color: blue;"><h2>Product_Name</h2></label>
+<h3> {{iteam.products}}</h3>
+ <br>   
+ <label for="" style="color: blue;"><h2>Qty</h2></label>
+<h3> {{iteam.qty}}</h3>
+ <br>
+ <!-- {{iteam.img}} -->
  {% endfor %}
 {% endblock %}

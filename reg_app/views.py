@@ -88,7 +88,7 @@ def productlist(request):
     return render(request,'productlist.html',{'products':products})
 
 
-@ login_required
+# @ login_required
 def updateproduct(request):
    products=UpdateCreationForm()
   
