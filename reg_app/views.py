@@ -33,7 +33,7 @@ def userdashbord(request):
         un=request.session.get('username')
         d={'username':un}
        # return render(request,'userdashbord.html',d)
-        return redirect('productlist')
+        return redirect('allproducts')
     return render(request,'userdashbord.html')
 
 def dealerdashbord(request):
@@ -77,15 +77,24 @@ def create_product(request):
     if request.method=='POST':
         dataform=ProductCreationForm(request.POST)
         if dataform.is_valid():
+            product=dataform.save(commit=False)
+            product.dealer=request.user
+            dataform.save()
            
             dataform.save()
-            return HttpResponse('<h1>create product....</h1>')
+           # return HttpResponse('<h1>create product....</h1>')
+            return redirect('dealerproductlist')
     return render(request,'create_product.html',{'form':form})
 
 
-def productlist(request):
-    products =product.objects.all()
-    return render(request,'productlist.html',{'products':products})
+def dealerproductlist(request):
+    products =product.objects.filter(dealer=request.user)
+    return render(request,'dealerproductlist.html',{'products':products})
+
+
+def allproducts(request):
+    products=product.objects.all()
+    return render(request,'allproducts.html',{'products':products})
 
 
 # @ login_required
@@ -98,7 +107,7 @@ def updateproduct(request):
         form = UpdateCreationForm(request.POST, instance=products)
         if form.is_valid():
             form.save()
-            return redirect('productlist')
+            return redirect('dealerproductlist')
            
    return render(request,'productupdate.html',{'products':products})
 
@@ -114,7 +123,7 @@ def deleteproduct(request):
             products=product.objects.get(pk=name)
             
             product.delete(products)
-            return redirect('productlist')
+            return redirect('dealerproductlist')
     return render(request, 'deleteproduct.html',{'pro':pro})
 
 
@@ -122,12 +131,14 @@ def deleteproduct(request):
 def addwishlist(request):
     add=WishlistForm()
     if request.method=='POST':
+       
         addproduct=WishlistForm(request.POST)
         if addproduct.is_valid():
              Wishlistiteam=addproduct.save(commit=False)
+             Wishlistiteam.user=request.user
              Wishlistiteam.product=product
              Wishlistiteam.save()
-             addproduct.save()
+            #addproduct.save()
 
            
 
@@ -137,5 +148,5 @@ def addwishlist(request):
 
 
 def wishlist(request):
-    products=Wishlist.objects.all()
+    products=Wishlist.objects.filter(user=request.user)
     return render(request,'displaywishlist.html',{'products':products})

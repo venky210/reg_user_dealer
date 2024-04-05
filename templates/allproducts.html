@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Product_List</title>
+{% endblock %}
+
+{% block block_body %}
+<center>
+<i><h1 style="color: brown;">DEALER PRODUCTS</h1></i>
+</center>
+{% for product in products %}
+  <h4> {{product.pname}}</h4>
+   <br>
+
+<img src="{{product.img}}" alt="" height="200px" width="200px">
+   <br><br>
+   <h4>{{product.price}}</h4> <br><br>
+
+   <a href="{% url 'addwishlist' %}">Add_WishList</a><br><br>
+  <button> <a href="{% url 'wishlist' %}">WishList</a></button>
+   
+   
+  
+   {% endfor %}
+{% endblock %}

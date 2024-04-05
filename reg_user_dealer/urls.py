@@ -26,9 +26,10 @@ urlpatterns = [
     path('dealerdashbord/',dealerdashbord,name='dealerdashbord'),
     path('logoutpage/',logoutpage,name='logoutpage'),
     path('create_product/',create_product,name='create_product'),
-    path('productlist/',productlist,name='productlist'),
+    path('dealerproductlist/',dealerproductlist,name='dealerproductlist'),
     path('updateproduct/',updateproduct,name='updateproduct'),
     path('deleteproduct',deleteproduct,name='deleteproduct'),
     path('addwishlist/',addwishlist,name='addwishlist'),
     path('wishlist/',wishlist,name='wishlist'),
+    path('allproducts/',allproducts,name='allproducts'),
 ]

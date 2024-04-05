@@ -6,7 +6,7 @@
 
 {% block block_body %}
 <center>
-<i><h1 style="color: brown;">ALL PRODUCTS</h1></i>
+<i><h1 style="color: brown;">DEALER PRODUCTS</h1></i>
 </center>
 {% for product in products %}
   <h4> {{product.pname}}</h4>
@@ -16,7 +16,6 @@
    <br><br>
    <h4>{{product.price}}</h4> 
    
-   <a href="{% url 'addwishlist' %}">Add_WishList</a>
-   <br><br>
+  
    {% endfor %}
 {% endblock %}
