@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Remove WishList</title>
+{% endblock %}
+
+
+{% block block_body %}
+<center>
+    <i><h1 style="color: blueviolet;">Remove WishList Iteam</h1></i>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="products">Product ID</label>
+       <input type="number" name="products" id="products"><br><br>
+        <input type="submit" value="Remove">
+    </form>
+
+   
+</center>
+{% endblock %}

@@ -31,6 +31,7 @@ class product(models.Model):
 class Wishlist(models.Model):
     user=models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank=True)
     products=models.ForeignKey(product,on_delete=models.CASCADE,null=True,blank=True)
+   # img=models.ForeignKey(product,on_delete=models.CASCADE,null=True,blank=True)
     qty=models.IntegerField(default=1)
 
 

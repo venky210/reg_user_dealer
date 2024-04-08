@@ -21,7 +21,7 @@ class UpdateCreationForm(forms.ModelForm):
         fields=['pname','qty','price']
 
 class DeleteCreationForm(forms.ModelForm):
-    class Mpeta:
+    class Meta:
         model=product
         fields=['pname']
 
@@ -30,3 +30,6 @@ class WishlistForm(forms.ModelForm):
     class Meta:
         model=Wishlist
         fields=['products','qty'] 
+
+
+

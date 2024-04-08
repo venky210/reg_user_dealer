@@ -32,4 +32,5 @@ urlpatterns = [
     path('addwishlist/',addwishlist,name='addwishlist'),
     path('wishlist/',wishlist,name='wishlist'),
     path('allproducts/',allproducts,name='allproducts'),
+    path('removewishlistiteam/',removewishlistiteam,name='removewishlistiteam'),
 ]

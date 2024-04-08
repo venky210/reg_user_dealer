@@ -16,6 +16,8 @@
    <br><br>
    <h4>{{product.price}}</h4> 
    
-  
+ <button>  <a href="{% url 'updateproduct' %}" class="nav-link">UpdateProduct</a></button>
+ <button>  <a href="{% url 'deleteproduct' %}" class="nav-link">DeleteProduct</a></button>
+    
    {% endfor %}
 {% endblock %}

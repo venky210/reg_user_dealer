@@ -2,12 +2,26 @@
 
 {% block title %}
    <title>Create_Product</title>
+   <style>
+    body{
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuWA8YpDKncQHqnjm3bQUU2n_mdu9jizQILQ&s);
+    }
+    div{
+        width: 300px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: antiquewhite;
+        border-radius: 10px;
+    }
+</style>
 
 {% endblock %}
 
 
 {% block block_body %}
 <center>
+   <i><h1 style="background-color: brown; color:antiquewhite" >Create Product</h1></i>
+   <div>
     <form action="" method="POST">
         {% csrf_token %}
         <br>
@@ -15,7 +29,7 @@
         {{form.as_p}}
         <input type="submit" value="Create">
 
-        
+    </div>
        
     </form>
 </center>

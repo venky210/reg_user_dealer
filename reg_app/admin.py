@@ -24,7 +24,7 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(product,ProductAdmin)
 
 
-# class WishlistAdmin(admin.ModelAdmin):
-#     list_display=['user','product','qty']
+class WishlistAdmin(admin.ModelAdmin):
+    list_display=['pk','user','products','qty']
 
-admin.site.register(Wishlist)
+admin.site.register(Wishlist,WishlistAdmin)

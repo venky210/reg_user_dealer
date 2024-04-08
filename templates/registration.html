@@ -3,15 +3,33 @@
 
 {% block title %}
  <title>Registration</title>
+ <style>
+    body{
+        background-image: url( https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5gX_YN2iVnc7KJ4XQ9AYhRgg7lwflVzm09A&s);
+        color: rgb(255, 155, 6);
+    
+    }
+    div{
+        font-family: Arial, Helvetica, sans-serif;
+        width: 400px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color:whitesmoke;
+        border-radius: 10px;
+        
+    }
+ </style>
 {% endblock%}
 
 {% block block_body %}
 <center>
     <h1 style="background-color: aqua;">Registration Form In Both User And Dealer</h1><br>
+    <div>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-    <input type="submit" value="register">
+    <input type="submit" value="register" style="border-radius: 5px;">
     </form>
+    </div>
 </center>
 {% endblock %}

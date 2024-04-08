@@ -22,7 +22,7 @@ def Registration(request):
             pw=user.cleaned_data['password']
             MUDFO.set_password(pw)
             MUDFO.save()
-            return HttpResponse('<h1>registration successfully.....</h1>')
+            return redirect('<h1>registration successfully.....</h1>')
         else:
             return HttpResponse('<h1>user alredy exits...</h1>')
 
@@ -150,3 +150,17 @@ def addwishlist(request):
 def wishlist(request):
     products=Wishlist.objects.filter(user=request.user)
     return render(request,'displaywishlist.html',{'products':products})
+
+
+
+def removewishlistiteam(request):
+  
+    if request.method == 'POST':
+        
+            name=request.POST['products']
+            products=Wishlist.objects.get(pk=name)
+            
+            Wishlist.delete(products)
+            return redirect('wishlist')
+    return render(request,'removewishlistiteam.html')
+
