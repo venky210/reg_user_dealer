@@ -1,0 +1,20 @@
+body{
+    color: rgb(13, 2, 27);
+    background: linear-gradient(45deg,yellow,green,red);
+    margin-bottom: 326px;
+  }
+  form{
+    backface-visibility: visible;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: cadetblue;
+  }
+
+  input{
+    background-color: rgb(229, 238, 221);
+    border-radius: 6px;
+
+  }

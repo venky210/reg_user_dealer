@@ -1,4 +1,5 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
+from django.contrib import messages
 
 # Create your views here.
 from reg_app.views import *
@@ -28,21 +29,21 @@ def Registration(request):
 
     return render (request,'registration.html',d)
 
-def userdashbord(request):
-    if request.session.get('username'):
-        un=request.session.get('username')
-        d={'username':un}
-       # return render(request,'userdashbord.html',d)
-        return redirect('allproducts')
-    return render(request,'userdashbord.html')
+# def userdashbord(request):
+#     if request.session.get('username'):
+#         un=request.session.get('username')
+#         d={'username':un}
+#        # return render(request,'userdashbord.html',d)
+#         return redirect('allproducts')
+#     return render(request,'userdashbord.html')
 
-def dealerdashbord(request):
-    if request.session.get('username'):
-        un=request.session.get('username')
-        d={'username':un}
-        #return render(request,'dealerdashbord.html',d)
-        return redirect('create_product')
-    return render(request,'dealerdashbord.html')
+# def dealerdashbord(request):
+#     if request.session.get('username'):
+#         un=request.session.get('username')
+#         d={'username':un}
+#         #return render(request,'dealerdashbord.html',d)
+#         return redirect('dealerproductlist')
+#     return render(request,'dealerdashbord.html')
 
 
 def loginpage(request):
@@ -55,9 +56,9 @@ def loginpage(request):
             request.session['username']=un
             
             if AUO.dealer:
-                return redirect('dealerdashbord')
+                return redirect('dealerproductlist')
             elif AUO.user:
-                return redirect('userdashbord')
+                return redirect('allproducts')
             else:
                 return redirect('homepage')
                 
@@ -79,10 +80,10 @@ def create_product(request):
         if dataform.is_valid():
             product=dataform.save(commit=False)
             product.dealer=request.user
-            dataform.save()
+            product.save()
            
-            dataform.save()
-           # return HttpResponse('<h1>create product....</h1>')
+           
+            #return HttpResponse('<h1>create product....</h1>')
             return redirect('dealerproductlist')
     return render(request,'create_product.html',{'form':form})
 
@@ -95,6 +96,16 @@ def dealerproductlist(request):
 def allproducts(request):
     products=product.objects.all()
     return render(request,'allproducts.html',{'products':products})
+
+def product_search(request):
+    query = request.POST.get('search_query')
+    if query:
+       
+        products =product.objects.filter(pname__icontains=query)
+    else:
+       
+        products = product.objects.all()
+    return render(request, 'allproducts.html', {'products': products})
 
 
 # @ login_required
@@ -130,7 +141,9 @@ def deleteproduct(request):
 
 def addwishlist(request):
     add=WishlistForm()
+  
     if request.method=='POST':
+      
        
         addproduct=WishlistForm(request.POST)
         if addproduct.is_valid():
@@ -138,19 +151,17 @@ def addwishlist(request):
              Wishlistiteam.user=request.user
              Wishlistiteam.product=product
              Wishlistiteam.save()
-            #addproduct.save()
+           # addproduct.save()
+            
 
-           
-
-        return redirect('wishlist')
+    return redirect('wishlist')
             #return HttpResponse('<h1> Add Product To WishList... </h1>')
-    return render(request,'addwishlist.html',{'add':add})
+   # return render(request,'addwishlist.html',{'add':add })
 
 
 def wishlist(request):
     products=Wishlist.objects.filter(user=request.user)
     return render(request,'displaywishlist.html',{'products':products})
-
 
 
 def removewishlistiteam(request):
@@ -163,4 +174,28 @@ def removewishlistiteam(request):
             Wishlist.delete(products)
             return redirect('wishlist')
     return render(request,'removewishlistiteam.html')
+
+
+
+def change_password(request):
+    if request.method=='POST':
+        pw=request.POST['pw']
+        username=request.session.get('username')
+        UO=CustomUser.objects.get(username=username)
+        UO.set_password(pw)
+        UO.save()
+        return HttpResponse('Password changed Successfully')
+    return render(request,'change_password.html')
+
+
+def profile_edit(request):
+    form=profileform()
+    user=request.user
+    if request.method=='POST':
+        form=profileform(request.POST,instance=user)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('<h1>Profile Edit Successfully....</h1>')
+
+    return render(request,'profile_edit.html',{'form':form})
 

@@ -1,0 +1,72 @@
+/* wishlist.css */
+
+/* Style for the wishlist items container */
+ul.wishlist-items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Style for each wishlist item */
+li.wishlist-item {
+    margin-bottom: 20px;
+    border: 1px solid #c2b2b2;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px; /* Adjust the width as needed */
+    background-color: #d16b92; /* Background cover color */
+}
+
+/* Style for the product information */
+.product-info {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.product-name {
+    color: blue;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.product-qty,
+.product-price {
+    color: blue;
+    margin-top: 5px;
+}
+
+.product-image {
+    max-width: 100px;
+    max-height: 100px;
+    margin-bottom: 10px;
+}
+
+/* Style for the remove button */
+.remove-button {
+    background-color: rgb(219, 200, 200);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+.remove-button:hover{
+    background-color: aqua;
+
+}
+
+/* Style for the product ID */
+.product-id {
+    color: rgb(235, 209, 62);
+    font-size: 14px;
+}
+body{
+    background: linear-gradient(45deg,rgb(230, 230, 118),rgb(89, 233, 89),rgb(221, 106, 106),rgb(114, 78, 12));
+    margin-bottom: 190px;
+}

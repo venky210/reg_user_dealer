@@ -29,7 +29,12 @@ class DeleteCreationForm(forms.ModelForm):
 class WishlistForm(forms.ModelForm):
     class Meta:
         model=Wishlist
-        fields=['products','qty'] 
+        fields=['products'] 
 
 
 
+class profileform(forms.ModelForm):
+    class Meta:
+        model=CustomUser
+        fields=['username','email']
+        help_texts={'username':''}

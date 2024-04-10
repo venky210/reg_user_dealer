@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 <title>Remove WishList</title>
+
+<link rel="stylesheet" href="{% static 'css/c6.css' %}">
 {% endblock %}
 
 
 {% block block_body %}
 <center>
     <i><h1 style="color: blueviolet;">Remove WishList Iteam</h1></i>
+    
     <form action="" method="POST">
         {% csrf_token %}
         <label for="products">Product ID</label>
        <input type="number" name="products" id="products"><br><br>
-        <input type="submit" value="Remove">
+       <input type="submit" value="Remove">
     </form>
 
    

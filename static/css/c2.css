@@ -1,0 +1,15 @@
+body{
+    color: rgb(255, 6, 6);
+    background: linear-gradient(45deg,rgb(134, 134, 57),rgb(149, 241, 149),rgb(150, 58, 58));
+    margin-bottom: 276px;
+
+  }
+  div{
+    backface-visibility: visible;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: cadetblue;
+  }

@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 <title>Display WishList</title>
+<link rel="stylesheet" href="{% static 'css/c9.css' %}">
 
 {% endblock %}
 
 {% block block_body %}
 <center>
-    <i><h1>All WishList Products</h1></i>
+    <i><h1 style="color: rgb(221, 14, 24);"> WishList Products</h1></i>
 </center>
-{% for iteam in products %}
-<label for="" style="color: blue;"><h2>Product_Name</h2></label>  
-<h3> {{iteam.products}}</h3>
- <br> 
-
-
- <label for="" style="color: blue;"><h2>Qty</h2></label>
-<h3> {{iteam.qty}}</h3>
-<button><a href="{% url 'removewishlistiteam' %}">Remove</a></button> <label for="" style="color: brown;">Product ID:-</label>{{iteam.pk}} 
- <br><br>
-
-
-
- <!-- {{iteam.img}} -->
- {% endfor %}
+<ul class="wishlist-items">
+    {% for item in products %}
+    <li class="wishlist-item">
+        <div class="product-info">
+           <b> <h1><class="product-name">{{ item.products.pname }}</h1></b>
+            <img class="product-image" src="{{item.products.img}}" alt="Product Image">
+            <p class="product-qty">Qty: {{ item.products.qty }}</p>
+            <p class="product-price">Price: {{ item.products.price }}</p>
+            
+        </div>
+        <button class="remove-button"><a href="{% url 'removewishlistiteam' %}">Remove</a></button>
+        <span class="product-id">Product ID: {{ item.pk }}</span>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

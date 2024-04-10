@@ -1,0 +1,71 @@
+/* c1.css */
+
+/* Center the form container */
+center {
+    margin-top: 50px;
+}
+
+/* Style the registration form */
+form {
+    width: 500px; /* Adjust width as needed */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #b8a0a0;
+}
+
+/* Style the form header */
+h1 {
+   
+    padding: 1px;
+    border-radius: 5px;
+    color: rgb(177, 140, 140);
+    
+}
+
+/* Style the form fields */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: 200px;
+    padding: 1px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Style the submit button */
+form input[type="submit"] {
+    background-color: rgb(164, 204, 204);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style the login button */
+form button {
+    background-color: #43df4b;
+    color: white;
+    padding: 6px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Add hover effect to buttons */
+form button:hover, form input[type="submit"]:hover {
+    background-color: #1cdf23;
+}
+
+/* Style form link */
+form button a {
+    text-decoration: none;
+    color: rgb(26, 6, 6);
+}
+body{
+   background: linear-gradient(45deg,yellow,blue,green);
+   margin-bottom: 60px;
+}

@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 <title>Product_List</title>
+<link rel="stylesheet" href="{% static 'css/c3.css' %}">
 {% endblock %}
 
 {% block block_body %}
 <center>
 <i><h1 style="color: brown;">DEALER PRODUCTS</h1></i>
 </center>
+<button><a href="{% url 'create_product' %}">Create_Product</a></button>
+<div class="product-container">
 {% for product in products %}
+<div class="product">
   <h4> {{product.pname}}</h4>
    <br>
 
@@ -18,6 +24,8 @@
    
  <button>  <a href="{% url 'updateproduct' %}" class="nav-link">UpdateProduct</a></button>
  <button>  <a href="{% url 'deleteproduct' %}" class="nav-link">DeleteProduct</a></button>
+ </div>
     
    {% endfor %}
+   </div>
 {% endblock %}

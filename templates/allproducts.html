@@ -1,25 +1,45 @@
-{% extends 'base.html' %}
+    {% extends 'base.html' %}
 
-{% block title %}
-<title>Product_List</title>
-{% endblock %}
+    {% load static %}
 
-{% block block_body %}
-<center>
-<i><h1 style="color: brown;">DEALER PRODUCTS</h1></i>
-</center>
-{% for product in products %}
-  <h4> {{product.pname}}</h4>
-   <br>
+    {% block title %}
+    <title>Product_List</title>
 
-<img src="{{product.img}}" alt="" height="200px" width="200px">
-   <br><br>
-   <h4>{{product.price}}</h4> <br><br>
+    <link rel="stylesheet" href="{% static 'css/c4.css' %}">
+    {% endblock %}
 
-   <a href="{% url 'addwishlist' %}">Add_WishList</a><br><br>
-  <button> <a href="{% url 'wishlist' %}">WishList</a></button>
-   
-   
-  
-   {% endfor %}
-{% endblock %}
+    {% block block_body %}
+    
+    <center>
+        <i><h1 style="color: brown;">ALL PRODUCTS</h1></i>
+
+        {% if user.is_authenticated %}
+       <h2> {{user.username}}</h2>
+        {% endif %}
+       
+       
+    </center>
+    
+    
+      
+    <button> <a href="{% url 'wishlist' %}">WishList</a></button><br><br>
+
+
+    <form action="{% url 'product_search' %}" method="POST">{% csrf_token %}
+        <input type="text" name="search_query" placeholder="Search Products">
+        <button type="submit">Search</button>
+    </form>
+    
+
+    <div class="product-container">
+        {% for product in products %}
+        <div class="product">
+            <h4>{{ product.pname }}</h4>
+            <img src="{{ product.img }}" alt="" height="200px" width="200px">
+            <h4>{{ product.price }}</h4>
+            <button><a href="{% url 'addwishlist' %}">Add to WishList</a></button>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock %}

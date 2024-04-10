@@ -1,0 +1,14 @@
+body{
+    color: rgb(13, 2, 27);
+    background: linear-gradient(45deg,rgb(235, 235, 219),rgb(2, 61, 2),rgb(104, 184, 164));
+    margin-bottom: 270px;
+  }
+  form{
+    backface-visibility: visible;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: cadetblue;
+  }

@@ -4,6 +4,12 @@
 {% block title %}
 
 <title>Home_page</title>
+<style>
+     body{
+          background: linear-gradient(45deg,yellow,blue,green);
+          margin-bottom: 560px;
+     }
+</style>
 {% endblock %}
 
 {% block block_body %}
@@ -11,7 +17,11 @@
    
 
     
-     <h1 style="color: blueviolet;">Well Come To Home_page</h1>
- 
+     <h1 style="color: rgb(58, 226, 43);">Well Come To Home_page</h1>
+     <button style="border-radius: 6px;"><a href="{% url 'loginpage' %}">Login</a></button>
+
+     <!-- <button><a href="{url 'Registration'}">Registration</a></button>
+     <button style="border-radius: 6px;"><a href="{% url 'loginpage' %}">Login</a></button>
+  -->
 </center>
 {% endblock %}

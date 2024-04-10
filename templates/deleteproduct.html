@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block tilte %}
 <title>Delete_Product</title>
+
+<link rel="stylesheet" href="{% static 'css/c8.css' %}">
 {% endblock %}
 
 {% block block_body %}
 <center>
-    <h1>Delete Product</h1>
+    <h1 style="color: blueviolet;">Delete Product</h1>
     
-    <h1>Are you sure you want to delete</h1>
+    <h1 style="color: aquamarine;">Are you sure you want to delete</h1>
     
     <form method="POST">
         {% csrf_token %}
