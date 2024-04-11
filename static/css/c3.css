@@ -1,5 +1,6 @@
 
 
+
 /* Center the block_body content */
 .block_body {
     text-align: center;
@@ -18,7 +19,7 @@
 /* Style for each product */
 .product {
     width: 300px; /* Adjust the width as needed */
-    background-color: rgba(76, 32, 196, 0.8); /* semi-transparent white background */
+    background-color: rgba(182, 178, 194, 0.8); /* semi-transparent white background */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -47,7 +48,7 @@
 
 .product h4.price {
     margin-top: 10px;
-    background-color: rgb(52, 165, 42); /* Background color for price */
+    background-color: rgb(147, 163, 146); /* Background color for price */
     color: white; /* Text color for price */
     padding: 5px; /* Padding for price */
     border-radius: 5px; /* Border radius for price */
@@ -83,4 +84,6 @@ button:hover{
     background-color: aqua;
     
 }
-
+body{
+    background-color: azure;
+}

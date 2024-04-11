@@ -23,7 +23,7 @@ def Registration(request):
             pw=user.cleaned_data['password']
             MUDFO.set_password(pw)
             MUDFO.save()
-            return redirect('<h1>registration successfully.....</h1>')
+            return HttpResponse('<h1>registration successfully.....</h1>')
         else:
             return HttpResponse('<h1>user alredy exits...</h1>')
 
@@ -125,54 +125,59 @@ def updateproduct(request):
 
 
 
-def deleteproduct(request):
-    #product = get_object_or_404(product, pk=product_id, dealer=request.user)
-    pro=DeleteCreationForm()
+def deleteproduct(request,product_id):
+    pro = get_object_or_404(product, pk=product_id,dealer=request.user)
+   
     if request.method == 'POST':
         
-            name=request.POST['pname']
-            products=product.objects.get(pk=name)
-            
-            product.delete(products)
+            pro.delete()
             return redirect('dealerproductlist')
     return render(request, 'deleteproduct.html',{'pro':pro})
 
 
 
-def addwishlist(request):
-    add=WishlistForm()
-  
+def addwishlist(request,product_id):
+    products=get_object_or_404(product,pk=product_id)
+    # existing_wishlist_item = Wishlist.objects.filter(user=request.user).first()
+
+    # if existing_wishlist_item:
+    #     messages.info(request, 'This item is already in your wishlist.')
+    #     return redirect('wishlist')
     if request.method=='POST':
       
        
         addproduct=WishlistForm(request.POST)
         if addproduct.is_valid():
-             Wishlistiteam=addproduct.save(commit=False)
-             Wishlistiteam.user=request.user
-             Wishlistiteam.product=product
-             Wishlistiteam.save()
+            Wishlistiteam=addproduct.save(commit=False)
+            Wishlistiteam.user=request.user
+            Wishlistiteam.products=products
+            Wishlistiteam.save()
            # addproduct.save()
             
 
-    return redirect('wishlist')
+            return redirect('wishlist')
+        else:
+            form=WishlistForm()
+  
             #return HttpResponse('<h1> Add Product To WishList... </h1>')
-   # return render(request,'addwishlist.html',{'add':add })
+    return render(request,'addwishlist.html',{'form':form,'products':products })
 
 
 def wishlist(request):
-    products=Wishlist.objects.filter(user=request.user)
-    return render(request,'displaywishlist.html',{'products':products})
+   wishlist_items=Wishlist.objects.filter(user=request.user)
+   return render(request,'displaywishlist.html',{'wishlist_items':wishlist_items})
 
 
-def removewishlistiteam(request):
+def removewishlistiteam(request,wishlist_id):
+    wishlist_item=get_object_or_404(Wishlist,pk=wishlist_id,user=request.user)
   
     if request.method == 'POST':
         
-            name=request.POST['products']
-            products=Wishlist.objects.get(pk=name)
+          
             
-            Wishlist.delete(products)
+            wishlist_item.delete()
             return redirect('wishlist')
+    
     return render(request,'removewishlistiteam.html')
 
 

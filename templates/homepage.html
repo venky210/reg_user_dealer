@@ -6,8 +6,7 @@
 <title>Home_page</title>
 <style>
      body{
-          background: linear-gradient(45deg,yellow,blue,green);
-          margin-bottom: 560px;
+        background-color: rgb(225, 235, 235);
      }
 </style>
 {% endblock %}
@@ -18,10 +17,11 @@
 
     
      <h1 style="color: rgb(58, 226, 43);">Well Come To Home_page</h1>
+    <button style="border-radius: 6px;"> <a href="{% url 'Registration' %}">Registration</a></button><br><br>
      <button style="border-radius: 6px;"><a href="{% url 'loginpage' %}">Login</a></button>
-
-     <!-- <button><a href="{url 'Registration'}">Registration</a></button>
+<!-- 
+     <button><a href="{url 'Registration'}">Registration</a></button>
      <button style="border-radius: 6px;"><a href="{% url 'loginpage' %}">Login</a></button>
-  -->
+   -->
 </center>
 {% endblock %}

@@ -10,6 +10,7 @@
 
     {% block block_body %}
     
+    
     <center>
         <i><h1 style="color: brown;">ALL PRODUCTS</h1></i>
 
@@ -34,10 +35,14 @@
     <div class="product-container">
         {% for product in products %}
         <div class="product">
-            <h4>{{ product.pname }}</h4>
+          <b>  <h1>{{ product.pname }}</h1></b>
             <img src="{{ product.img }}" alt="" height="200px" width="200px">
-            <h4>{{ product.price }}</h4>
-            <button><a href="{% url 'addwishlist' %}">Add to WishList</a></button>
+            <h3>$ {{ product.price }}</h3>
+           
+            <form action="{% url 'addwishlist' product.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Add TO Wishlist</button>
+            </form>
         </div>
         {% endfor %}
     </div>

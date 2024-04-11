@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% load static %}
@@ -15,17 +16,24 @@
 <div class="product-container">
 {% for product in products %}
 <div class="product">
-  <h4> {{product.pname}}</h4>
+ <b> <h1 style="margin-left: 90px;"> {{product.pname}}</h1></b>
    <br>
 
 <img src="{{product.img}}" alt="" height="200px" width="200px">
    <br><br>
-   <h4>{{product.price}}</h4> 
+   <h3>$ {{product.price}}</h3> 
    
  <button>  <a href="{% url 'updateproduct' %}" class="nav-link">UpdateProduct</a></button>
- <button>  <a href="{% url 'deleteproduct' %}" class="nav-link">DeleteProduct</a></button>
+ <form method="post" action="{% url 'deleteproduct' product.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger" style="padding: 8px 80px;">DeleteProduct</button>
+</form>
+
  </div>
     
    {% endfor %}
    </div>
 {% endblock %}
+
+
+

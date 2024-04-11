@@ -29,7 +29,7 @@ class DeleteCreationForm(forms.ModelForm):
 class WishlistForm(forms.ModelForm):
     class Meta:
         model=Wishlist
-        fields=['products'] 
+        fields=[] 
 
 
 

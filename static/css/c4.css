@@ -4,7 +4,7 @@
 .block_body {
     text-align: center;
     margin-top: 20px;
-    background-color: aliceblue;
+    background-color: rgb(196, 202, 207);
 }
 
 /* Style for the product container */
@@ -19,7 +19,7 @@
 /* Style for each product */
 .product {
     width: 300px; /* Adjust the width as needed */
-    background-color: rgba(196, 180, 32, 0.8); /* semi-transparent white background */
+    background-color: rgba(199, 197, 176, 0.8); /* semi-transparent white background */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -84,4 +84,7 @@ button:hover{
     background-color: aqua;
     
 }
-
+body
+{
+    background-color: rgb(169, 170, 172);
+}

@@ -1,72 +1,47 @@
-/* wishlist.css */
+/* CSS for Wishlist Page */
 
-/* Style for the wishlist items container */
-ul.wishlist-items {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+/* Wishlist Heading */
+.wishlist-heading {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
 
-/* Style for each wishlist item */
-li.wishlist-item {
-    margin-bottom: 20px;
-    border: 1px solid #c2b2b2;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px; /* Adjust the width as needed */
-    background-color: #d16b92; /* Background cover color */
+/* Product Cards */
+.card {
+  border: 1px solid #5f5252;
+  border-radius: 10px;
 }
 
-/* Style for the product information */
-.product-info {
-    flex-grow: 1;
-    text-align: center;
+.card-img-top {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 300px; /* Adjust height as needed */
+  object-fit: 100%; /* Ensure the entire image fits within the card */
 }
 
-.product-name {
-    color: blue;
-    font-size: 18px;
-    margin-bottom: 5px;
+.card-body {
+  padding: 20px;
 }
 
-.product-qty,
-.product-price {
-    color: blue;
-    margin-top: 5px;
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.product-image {
-    max-width: 100px;
-    max-height: 100px;
-    margin-bottom: 10px;
+.card-text {
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 
-/* Style for the remove button */
-.remove-button {
-    background-color: rgb(219, 200, 200);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    border-radius: 6px;
-}
-.remove-button:hover{
-    background-color: aqua;
-
+.btn-danger {
+  width: 100%;
 }
 
-/* Style for the product ID */
-.product-id {
-    color: rgb(235, 209, 62);
-    font-size: 14px;
-}
-body{
-    background: linear-gradient(45deg,rgb(230, 230, 118),rgb(89, 233, 89),rgb(221, 106, 106),rgb(114, 78, 12));
-    margin-bottom: 190px;
+/* Empty Wishlist Message */
+.wishlist-empty {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 50px;
 }

@@ -66,6 +66,5 @@ form button a {
     color: rgb(26, 6, 6);
 }
 body{
-   background: linear-gradient(45deg,yellow,blue,green);
-   margin-bottom: 60px;
+   background-color: antiquewhite;
 }
