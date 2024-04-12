@@ -5,18 +5,22 @@
 {% load static %}
 
 {% block title %}
+
 <title>wishlist</title>
 <link rel="stylesheet" href="{% static 'css/c9.css' %}">
+<style>
+   
+</style>
 {% endblock %}
 
 {% block block_body %}
-    <h1 class="wishlist-heading">Wishlist</h1>
+    <h1 class="wishlist-heading" style="color:brown">{{user.username}} Wishlist products</h1>
     <div class="row">
         {% for item in wishlist_items %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <img class="card-img-top" src="{{ item.products.img }}" alt="Product Image">
-                    <div class="card-body">
+                    <div class="card-body" style="background-color: bisque;">
                         <h1 class="card-title">{{ item.products.pname }}</h1>
                         <p class="card-text">Price: ${{ item.products.price }}</p>
                         <p class="card-text">Quantity: {{ item.products.qty }}</p>

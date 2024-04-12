@@ -59,8 +59,11 @@ def loginpage(request):
                 return redirect('dealerproductlist')
             elif AUO.user:
                 return redirect('allproducts')
+            
+            
             else:
                 return redirect('homepage')
+            
                 
     return render(request,'loginpage.html')
 

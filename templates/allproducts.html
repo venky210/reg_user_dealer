@@ -9,30 +9,25 @@
     {% endblock %}
 
     {% block block_body %}
+    <form action="{% url 'product_search' %}" method="POST">{% csrf_token %}
+        <input type="text" name="search_query" placeholder="Search Products" style="border-radius: 6px;">
+        <button type="submit" style="color: brown;">Search</button>
+    </form>
+    <br>
+    <button> <a href="{% url 'wishlist' %}">WishList</a></button><br><br>
+
     
     
     <center>
-        <i><h1 style="color: brown;">ALL PRODUCTS</h1></i>
-
-        {% if user.is_authenticated %}
-       <h2> {{user.username}}</h2>
-        {% endif %}
-       
-       
+        <i><h1 style="color: brown; " >PRODUCTS</h1></i>    
+     
     </center>
     
     
-      
-    <button> <a href="{% url 'wishlist' %}">WishList</a></button><br><br>
-
-
-    <form action="{% url 'product_search' %}" method="POST">{% csrf_token %}
-        <input type="text" name="search_query" placeholder="Search Products">
-        <button type="submit">Search</button>
-    </form>
     
-
     <div class="product-container">
+       
+
         {% for product in products %}
         <div class="product">
           <b>  <h1>{{ product.pname }}</h1></b>

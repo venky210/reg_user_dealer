@@ -28,3 +28,7 @@ class WishlistAdmin(admin.ModelAdmin):
     list_display=['pk','user','products','qty']
 
 admin.site.register(Wishlist,WishlistAdmin)
+
+
+
+admin.site.register(Admin)

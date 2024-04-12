@@ -5,6 +5,7 @@ class CustomUser(AbstractUser):
     USER_ROLES = (
         ('user','User'),
         ('dealer','Dealer'),
+        
        
        
     )
@@ -37,3 +38,12 @@ class Wishlist(models.Model):
     # def __str__(self):
     #     return self.products
 
+
+class Admin(models.Model):
+    username=models.CharField(max_length=100)
+    password=models.IntegerField(default=True,)
+    category=models.CharField(max_length=100,null=True,blank=True)
+
+   
+    def __str__(self):
+        return self.name
