@@ -5,24 +5,29 @@
 {% block title %}
    <title>Create_Product</title>
   
- <link rel="stylesheet" href="{% static 'css/c5.css' %}">
+   <style>
+    body{
+        background-color: antiquewhite;
+    }
+   </style>
 {% endblock %}
-
 
 {% block block_body %}
-<center>
-   <i><h1 style="background-color: brown; color:antiquewhite" >Create Product</h1></i>
-   <div>
-    <form action="" method="POST">
-        {% csrf_token %}
-        
-        
-        {{form.as_p}}
-        <input type="submit" value="Create">
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3"> <!-- Adjust the column width and offset as needed -->
+            <center>
+                <div style="background-color: #9e9797; padding: 20px; border-radius: 10px; margin-top:60px;"> <!-- Apply background color and styling to the form -->
+                    <i><h1 style="color:brown";>Create Product</h1></i>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}        
+                        {{ form.as_p }}
+                        
+                        <input type="submit" class="btn btn-primary" value="Create">
+                    </form>
+                </div>
+            </center>
+        </div>
     </div>
-       
-    </form>
-</center>
+</div>
 {% endblock %}
-

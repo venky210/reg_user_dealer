@@ -19,7 +19,9 @@
         {% for item in wishlist_items %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img class="card-img-top" src="{{ item.products.img }}" alt="Product Image">
+                    <img class="card-img-top" src="{{ item.products.img.url }}" alt="Product Image">
+                    
+                    
                     <div class="card-body" style="background-color: bisque;">
                         <h1 class="card-title">{{ item.products.pname }}</h1>
                         <p class="card-text">Price: ${{ item.products.price }}</p>

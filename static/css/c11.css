@@ -1,0 +1,46 @@
+/* c11.css */
+
+/* Center content */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.product img {
+    margin-bottom: 10px;
+}
+
+.product a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007bff; /* Change this color as needed */
+}
+
+.product a:hover {
+    color: #0056b3; /* Change this color as needed */
+}
+
+.product form {
+    margin-top: 10px;
+}
+
+.product form input[type="submit"] {
+    background-color: #dc3545; /* Change this color as needed */
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.product form input[type="submit"]:hover {
+    background-color: #c82333; /* Change this color as needed */
+}

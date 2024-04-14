@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+    {% load static %}
+
+    {% block title %}
+    <title>Product_List</title>
+
+    <link rel="stylesheet" href="{% static 'css/c4.css' %}">
+    {% endblock %}
+
+    {% block block_body %}
+
+    <center>
+        <i><h1 style="color: brown; " >Filter</h1></i>    
+     
+    </center>
+    
+    
+    
+    <div class="product-container">
+       
+
+        {% for product in products %}
+        <div class="product">
+          <b>  <h1>{{ product.pname }}</h1></b>
+            <img src="{{ product.img.url }}" alt="" height="200px" width="200px">
+            <h3>$ {{ product.price }}</h3>
+           
+            <form action="{% url 'addwishlist' product.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Add TO Wishlist</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock %}

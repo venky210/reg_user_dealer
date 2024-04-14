@@ -8,6 +8,8 @@ from reg_app.models import *
 from django.contrib.auth import authenticate,login,logout
 
 from django.contrib.auth.decorators import login_required
+from django.utils.html import mark_safe
+
 
 def homepage(request):
    
@@ -59,12 +61,11 @@ def loginpage(request):
                 return redirect('dealerproductlist')
             elif AUO.user:
                 return redirect('allproducts')
-            
-            
+            elif AUO.admin:
+                return redirect('category_list')
+    
             else:
-                return redirect('homepage')
-            
-                
+                return redirect('homepage')   
     return render(request,'loginpage.html')
 
 
@@ -79,7 +80,7 @@ def logoutpage(request):
 def create_product(request):
     form=ProductCreationForm()
     if request.method=='POST':
-        dataform=ProductCreationForm(request.POST)
+        dataform=ProductCreationForm(request.POST,request.FILES)
         if dataform.is_valid():
             product=dataform.save(commit=False)
             product.dealer=request.user
@@ -91,9 +92,31 @@ def create_product(request):
     return render(request,'create_product.html',{'form':form})
 
 
-def dealerproductlist(request):
+def dealerproductlist(request): 
     products =product.objects.filter(dealer=request.user)
     return render(request,'dealerproductlist.html',{'products':products})
+
+
+# def create_product(request):
+#     if request.method == 'POST':
+#         dataform = ProductCreationForm(request.POST)
+#         if dataform.is_valid():
+#             product = dataform.save(commit=False)
+#             product.dealer = request.user
+#             product.save()
+#             category_id = request.POST.get('category')  # Get category ID from the form
+#             return redirect('dealerproductlist', category_id=category_id)
+#     else:
+#         form = ProductCreationForm()
+#     return render(request, 'create_product.html', {'form': form})
+
+# def dealerproductlist(request, category_id=None):
+#     if category_id:
+#         category = get_object_or_404(Category, id=category_id)
+#         products = product.objects.filter(dealer=request.user, category=category)
+#     else:
+#         products = product.objects.filter(dealer=request.user)
+#     return render(request, 'dealerproductlist.html', {'products': products})
 
 
 def allproducts(request):
@@ -101,29 +124,43 @@ def allproducts(request):
     return render(request,'allproducts.html',{'products':products})
 
 def product_search(request):
-    query = request.POST.get('search_query')
+    query = request.GET.get('query')
+    products = product.objects.all()
     if query:
-       
-        products =product.objects.filter(pname__icontains=query)
-    else:
-       
-        products = product.objects.all()
-    return render(request, 'allproducts.html', {'products': products})
+        products = products.filter(pname__icontains=query)
+    return render(request, 'product_search.html', {'products': products, 'query': query})
+
+
+
 
 
 # @ login_required
-def updateproduct(request):
-   products=UpdateCreationForm()
+# def updateproduct(request):
+#    products=UpdateCreationForm()
   
-   if request.method == 'POST':
-        name=request.POST['pname']
-        products=product.objects.get(pname=name)
-        form = UpdateCreationForm(request.POST, instance=products)
+#    if request.method == 'POST':
+#         name=request.POST['pname']
+#         products=product.objects.get(pname=name)
+#         form = UpdateCreationForm(request.POST, instance=products)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('dealerproductlist')
+           
+#    return render(request,'productupdate.html',{'products':products})
+
+
+def updateproduct(request, product_id):
+    Product = get_object_or_404(product, pk=product_id, dealer=request.user)
+    if request.method == 'POST':
+        form =UpdateCreationForm(request.POST, instance=Product)
         if form.is_valid():
             form.save()
             return redirect('dealerproductlist')
-           
-   return render(request,'productupdate.html',{'products':products})
+    else:
+        form = UpdateCreationForm(instance=Product)
+    
+    return render(request, 'productupdate.html', {'products': form})
+
 
 
 
@@ -141,11 +178,11 @@ def deleteproduct(request,product_id):
 
 def addwishlist(request,product_id):
     products=get_object_or_404(product,pk=product_id)
-    # existing_wishlist_item = Wishlist.objects.filter(user=request.user).first()
+    existing_wishlist_item = Wishlist.objects.filter(user=request.user, products=products).first()
 
-    # if existing_wishlist_item:
-    #     messages.info(request, 'This item is already in your wishlist.')
-    #     return redirect('wishlist')
+    if existing_wishlist_item:
+       
+        return redirect('wishlist')
     if request.method=='POST':
       
        
@@ -173,14 +210,9 @@ def wishlist(request):
 
 def removewishlistiteam(request,wishlist_id):
     wishlist_item=get_object_or_404(Wishlist,pk=wishlist_id,user=request.user)
-  
     if request.method == 'POST':
-        
-          
-            
             wishlist_item.delete()
-            return redirect('wishlist')
-    
+            return redirect('wishlist')    
     return render(request,'removewishlistiteam.html')
 
 
@@ -207,3 +239,60 @@ def profile_edit(request):
 
     return render(request,'profile_edit.html',{'form':form})
 
+
+
+
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, 'category_list.html', {'categories': categories})
+
+def category_detail(request, category_id):
+    category = Category.objects.get(pk=category_id)
+    return render(request, 'category_detail.html', {'category': category})
+
+
+
+
+
+
+def add_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+      
+        if form.is_valid():
+            form.save()
+          
+            return redirect('category_list')
+    else:
+        form = CategoryForm()
+    return render(request, 'add_category.html', {'form': form})
+
+def category_update(request, category_id):
+    category = Category.objects.get(id=category_id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('category_list')
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'add_category.html', {'form': form})
+
+def category_delete(request, category_id):
+    category = Category.objects.get(id=category_id)
+    if request.method == 'POST':
+        category.delete()
+        return redirect('category_list')
+    return render(request, 'category_confirm_delete.html', {'category': category})
+
+
+
+            #  <--   SORTING PRICE  -->
+
+def lowtohigh(request):
+    products = product.objects.order_by('price')
+    return render(request, 'sort_by_price.html',{'products':products})
+
+def hightolow(request):
+    products = product.objects.order_by('-price')
+    return render(request, 'sort_by_price.html',{'products':products})

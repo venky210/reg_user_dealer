@@ -5,6 +5,7 @@ class CustomUser(AbstractUser):
     USER_ROLES = (
         ('user','User'),
         ('dealer','Dealer'),
+        ('admin','Admin'),
         
        
        
@@ -12,6 +13,18 @@ class CustomUser(AbstractUser):
    
     user=models.BooleanField(default=False)
     dealer=models.BooleanField(default=False)
+    admin=models.BooleanField(default=False)
+
+
+class Category(models.Model):
+   
+    category=models.CharField(max_length=100,unique=True)
+
+
+    def __str__(self):
+        return self.category
+
+
 
 
 
@@ -20,9 +33,9 @@ class product(models.Model):
     pname=models.CharField(max_length=100)
     qty=models.IntegerField(default=1)
     price=models.DecimalField(max_digits=10,decimal_places=2)
-    img=models.URLField()
+    img=models.ImageField()
     dealer=models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank=True)
-  
+    category=models.ForeignKey(Category,on_delete=models.CASCADE,null=True,blank=True)
     def __str__(self):
         return self.pname
 
@@ -34,16 +47,13 @@ class Wishlist(models.Model):
   
     qty=models.IntegerField(default=1)
 
+    
+
 
     # def __str__(self):
     #     return self.products
 
 
-class Admin(models.Model):
-    username=models.CharField(max_length=100)
-    password=models.IntegerField(default=True,)
-    category=models.CharField(max_length=100,null=True,blank=True)
 
    
-    def __str__(self):
-        return self.name
+   

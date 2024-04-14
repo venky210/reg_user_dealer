@@ -11,6 +11,7 @@
     <title>{% block title %}Online_Shop{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'images/logo.jpg' %}">
+    
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -29,6 +30,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {% if user.profile.picture %}
+                        
                         <img src="{{ user.profile.picture.url }}" alt="Profile Picture" class="profile-picture">
                         {% else %}
                         <div class="user-profile-icon">
@@ -42,6 +44,7 @@
                         <a class="dropdown-item" href="{% url 'admin:index' %}">Admin_Page</a>
                        
                         <a class="dropdown-item" href="{% url 'profile_edit' %}">Profile</a>
+
                     </div>
                 </li>
                 {% endif %}

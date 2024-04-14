@@ -7,12 +7,12 @@ from reg_app.models import *
 
 
 
-class CustomUserAdmin(admin.ModelAdmin):
+# class CustomUserAdmin(admin.ModelAdmin):
     
-    list_display=['username','email','user','dealer']
+#     list_display=['username','email','user','dealer']
     
 
-admin.site.register(CustomUser,CustomUserAdmin)
+admin.site.register(CustomUser)
 
 
 
@@ -30,5 +30,6 @@ class WishlistAdmin(admin.ModelAdmin):
 admin.site.register(Wishlist,WishlistAdmin)
 
 
-
-admin.site.register(Admin)
+# class CategoryAdmin(admin.ModelAdmin):
+#     list_display=['username','category']
+admin.site.register(Category)

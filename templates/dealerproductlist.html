@@ -15,15 +15,17 @@
 <button><a href="{% url 'create_product' %}">Create_Product</a></button>
 <div class="product-container">
 {% for product in products %}
+
+<!-- {{product.category}} --> 
 <div class="product">
- <b> <h1 style="margin-left: 90px;"> {{product.pname}}</h1></b>
+ <b> <h1> {{product.pname}}</h1></b>
    <br>
 
-<img src="{{product.img}}" alt="" height="200px" width="200px">
+<img src="{{product.img.url}}" alt="" height="200px" width="200px">
    <br><br>
-   <h3>$ {{product.price}}</h3> 
+   <h3>price {{product.price}}</h3> 
    
- <button>  <a href="{% url 'updateproduct' %}" class="nav-link">UpdateProduct</a></button>
+ <button>  <a href="{% url 'updateproduct' product.id %}" class="nav-link">UpdateProduct</a></button>
  <form method="post" action="{% url 'deleteproduct' product.id %}">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger" style="padding: 8px 80px;">DeleteProduct</button>
