@@ -24,7 +24,8 @@
         <div class="product">
           <b>  <h1>{{ product.pname }}</h1></b>
             <img src="{{ product.img.url }}" alt="" height="200px" width="200px">
-            <h3>$ {{ product.price }}</h3>
+            <h3>Price {{ product.price }}</h3>
+            <h3>Category {{product.category}}</h3>
            
             <form action="{% url 'addwishlist' product.id %}" method="POST">
                 {% csrf_token %}

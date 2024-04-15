@@ -23,7 +23,8 @@
 
 <img src="{{product.img.url}}" alt="" height="200px" width="200px">
    <br><br>
-   <h3>price {{product.price}}</h3> 
+   <h3>price {{product.price}}</h3>
+   <h3>category:{{product.category}}</h3>
    
  <button>  <a href="{% url 'updateproduct' product.id %}" class="nav-link">UpdateProduct</a></button>
  <form method="post" action="{% url 'deleteproduct' product.id %}">
