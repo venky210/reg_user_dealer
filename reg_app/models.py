@@ -10,6 +10,13 @@ class CustomUser(AbstractUser):
        
        
     )
+
+
+    Address=models.CharField(max_length=100,blank=True,null=True)
+    city=models.CharField(max_length=100,blank=True,null=True)
+    pincode=models.IntegerField(blank=True,null=True)
+    mobile_no=models.IntegerField(blank=True,null=True)
+
    
     user=models.BooleanField(default=False)
     dealer=models.BooleanField(default=False)
@@ -54,6 +61,38 @@ class Wishlist(models.Model):
     #     return self.products
 
 
+class Cart(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+  
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    
-   
+# class Address(models.Model):
+#     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+#     address = models.CharField(max_length=255, blank=True, null=True)
+#     city=models.CharField(max_length=100,blank=True,null=True)
+#     mobile_number = models.CharField(max_length=15, blank=True, null=True)
+#     current_location = models.CharField(max_length=255, blank=True, null=True)
+#     pincode=models.IntegerField(blank=True, null=True)
+
+    # def __str__(self):
+    #     return self.user.username

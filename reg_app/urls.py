@@ -21,8 +21,7 @@ urlpatterns = [
     path('removewishlistiteam/<int:wishlist_id>/',removewishlistiteam,name='removewishlistiteam'),
     path('product_search/',product_search,name='product_search'),
     path('change_password/',change_password,name='change_password'),
-    path('profile_edit/',profile_edit,name='profile_edit'),
-
+   
 
     path('categories/', category_list, name='category_list'),
     path('categories_deatil/<int:category_id>/', category_detail, name='category_detail'),
@@ -34,4 +33,27 @@ urlpatterns = [
 
     path('lowtohigh/',lowtohigh,name='lowtohigh'),
     path('hightolow/',hightolow,name='hightolow'),
+
+    path('Address/',Address,name='Address'),
+
+    path('add_to_cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
+    path('view_cart/', view_cart, name='view_cart'),
+    path('checkout/',checkout,name='checkout'),
+    path('removecart/<int:cart_item_id>/',removecart, name='removecart'),
+    # path('ShipingAddress/',ShipingAddress,name='ShipingAddress'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

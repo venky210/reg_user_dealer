@@ -20,10 +20,6 @@ class UpdateCreationForm(forms.ModelForm):
         model=product
         fields=['pname','qty','price']
 
-class DeleteCreationForm(forms.ModelForm):
-    class Meta:
-        model=product
-        fields=['pname']
 
 
 class WishlistForm(forms.ModelForm):
@@ -45,3 +41,25 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['category']
+
+
+
+class UserAddressForm(forms.ModelForm):
+    class Meta:
+        model =CustomUser
+        fields=['username','Address','city','pincode','mobile_no']
+        help_texts={'username':''}
+
+
+
+
+
+
+
+
+
+
+# class ShipingAddressForm(forms.ModelForm):
+#     class Meta:
+#         model=Address
+#         fields='__all__'

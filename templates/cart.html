@@ -1,0 +1,113 @@
+<!-- cart.html --> 
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Cart</title>
+{% endblock %}
+
+{% block block_body %}
+<center>
+    <div class="checkout-container">
+        <div class="cart">
+
+            <h1>Cart Details</h1>
+            <table border="3px">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart_item in cart_items %}
+                    <tr>
+                        <td><img src="{{cart_item.product.img.url}}" alt="" height="80px" width="80px"></td>
+                        <td>{{ cart_item.product.pname }}</td>
+                        <td>${{ cart_item.product.price }}</td>
+                        <td>
+                            <button type="button" class="increment-btn" style="border-radius:50px">+</button>
+                            <span class="quantity">{{ cart_item.product.qty }}</span>
+                            <button type="button" class="decrement-btn" style="border-radius:50px">-</button>
+                        </td>
+                        <td>${{ cart_item.product.price|floatformat:"2" }}</td>
+                        <td>
+                            <form action="{% url 'removecart' cart_item.id %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="Remove">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="4"><strong>Total:</strong></td>
+                        <td>{{ total_price }}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    <form action="{% url 'checkout' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Checkout">
+    </form>
+   
+
+    </center>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var incrementButtons = document.querySelectorAll(".increment-btn");
+            var decrementButtons = document.querySelectorAll(".decrement-btn");
+        
+            incrementButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var quantityElement = this.parentNode.querySelector(".quantity");
+                    var price = parseFloat(quantityElement.getAttribute("data-price"));
+                    var qty = parseInt(quantityElement.textContent);
+                    quantityElement.textContent = qty + 1;
+                    updateItemTotal(this.parentNode.parentNode, price);
+                    updateTotalPrice();
+                });
+            });
+        
+            decrementButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var quantityElement = this.parentNode.querySelector(".quantity");
+                    var price = parseFloat(quantityElement.getAttribute("data-price"));
+                    var qty = parseInt(quantityElement.textContent);
+                    if (qty > 1) {
+                        quantityElement.textContent = qty - 1;
+                        updateItemTotal(this.parentNode.parentNode, -price);
+                        updateTotalPrice();
+                    }
+                });
+            });
+
+            function updateItemTotal(row, price) {
+                var itemTotalElement = row.querySelector(".item-total");
+                var currentTotal = parseFloat(itemTotalElement.textContent.replace("$", ""));
+                var newTotal = currentTotal + price;
+                itemTotalElement.textContent = "$" + newTotal.toFixed(2);
+            }
+
+            function updateTotalPrice() {
+                var itemTotalElements = document.querySelectorAll(".item-total");
+                var totalPrice = 0;
+                itemTotalElements.forEach(function(element) {
+                    totalPrice += parseFloat(element.textContent.replace("$", ""));
+                });
+                document.getElementById("total-price").textContent = "$" + totalPrice.toFixed(2);
+            }
+        });
+    </script>
+
+   
+      
+   
+{% endblock %}

@@ -1,0 +1,20 @@
+.checkout-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .cart {
+    flex: 1;
+    margin-right: 40px;
+    
+  }
+  
+  .user-info {
+    flex: 1;
+    text-align:400px; /* Align user info to the right */
+  }
+  
+  
+  
+  

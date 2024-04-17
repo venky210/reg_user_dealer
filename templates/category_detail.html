@@ -1,20 +1,41 @@
-<!-- category_detail.html -->
 {% extends 'base.html' %}
 
-{% block tilte %}
+{% load static %}
+
+{% block title %}
     <title>Category Detail</title>
+    
+    <link rel="stylesheet" href="{% static 'css/c12.css' %}">
+
 {% endblock %}
 
 {% block block_body %}
-<center>
-    <h1>{{ category.category }}</h1>
-   
-    <a href="{% url 'category_update' category.id %}">Update Category</a>
-    <form action="{% url 'category_delete' category.id %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Delete Category">
-
-    </form>
-    </center>
-   
+<div class="cover-background">
+    <div class="content-container">
+        <center>
+            <h1 style="color: brown;">{{ category.category }}</h1>
+            {% if user.admin %}
+             
+             <button>   <a href="{% url 'category_update' category.id %}">Update Category</a></button>
+            
+                <form action="{% url 'category_delete' category.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="submit-button">
+                    <input type="submit" value="Delete Category">
+                    </div>
+                </form>
+            {% endif %}
+        </center>
+        <div class="product-container">
+            {% for product in products %}
+                <div class="product">
+                    <h1>{{ product.pname }}</h1>
+                    <img src="{{ product.img.url }}" alt="" height="200px" width="200px">
+                    <h3>price {{ product.price }}</h3>
+                    <h3>Category: {{ product.category }}</h3>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

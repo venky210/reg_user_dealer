@@ -8,38 +8,42 @@
 
 <title>wishlist</title>
 <link rel="stylesheet" href="{% static 'css/c9.css' %}">
-<style>
-   
-</style>
+
 {% endblock %}
 
 {% block block_body %}
-    <h1 class="wishlist-heading" style="color:brown">{{user.username}} Wishlist products</h1>
-    <div class="row">
-        {% for item in wishlist_items %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img class="card-img-top" src="{{ item.products.img.url }}" alt="Product Image">
-                    
-                    
-                    <div class="card-body" style="background-color: bisque;">
-                        <h1 class="card-title">{{ item.products.pname }}</h1>
-                        <p class="card-text">Price: ${{ item.products.price }}</p>
-                        <p class="card-text">Quantity: {{ item.products.qty }}</p>
-                        <form method="post" action="{% url 'removewishlistiteam' item.pk %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Remove from Wishlist</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        {% empty %}
-            <div class="col">
-                <p class="wishlist-empty">Your wishlist is empty.</p>
-            </div>
-        {% endfor %}
+  
+<center>
+    <i><h1 style="color: brown; " >{{user.username}} WishList Products</h1></i>    
+ 
+</center>
+
+
+
+<div class="product-container">
+   
+
+    {% for item in wishlist_items %}
+    <div class="product" style="background-color:rgba(199, 197, 176, 0.8);">
+      <b>  <h1>{{ item.products.pname }}</h1></b>
+        <img src="{{ item.products.img.url }}" alt="" height="200px" width="200px">
+        <h3>price {{item.products.price }}</h3>
+        
+        <h3> Category:{{item.products.category}}</h3>
+       
+        <form action="{% url 'removewishlistiteam' item.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" style="margin: 3px 8px 8px;" >Remove Wishlist </button>
+        </form>
+
+        <form action="{% url 'add_to_cart' item.products.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" style="margin: 3px 8px 8px;">Add To Cart</button>
+        </form>
+        
+        
     </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
-
-
-

@@ -10,6 +10,11 @@
 
     {% block block_body %}
 
+
+   
+
+   
+
    
 
 
@@ -23,16 +28,19 @@
 
     <form action="{% url 'product_search' %}" method="GET" class="search-bar">
         {% csrf_token %}
-    
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 1200px;">
                 Filters
             </button>  
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{% url 'lowtohigh' %}">Price: Low to High</a>
                 <a class="dropdown-item" href="{% url 'hightolow' %}">Price: High to Low</a>
-               
+                
+            
+        
+                <a class="dropdown-item" href="{% url 'category_list' %}">Category</a>
                 <a class="dropdown-item" href="{% url 'wishlist' %}">Wishlist</a>
+                <a class="dropdown-item" href="{% url 'view_cart' %}">Cart</a>
                 <input class="form-control mr-2 flex-grow-1" type="search" placeholder="Search products" aria-label="Search" name="query">
                
             </div>
@@ -63,10 +71,15 @@
            
             <form action="{% url 'addwishlist' product.id %}" method="POST">
                 {% csrf_token %}
-                <button type="submit">Add TO Wishlist</button>
+                <button type="submit" style="margin: 3px 8px 8px;">Add TO Wishlist</button>
+            </form>
+            <form action="{% url 'add_to_cart' product.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" style="margin: 3px 8px 8px;">Add To Cart</button>
             </form>
         </div>
         {% endfor %}
     </div>
+   
 
     {% endblock %}

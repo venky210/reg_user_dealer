@@ -33,3 +33,11 @@ admin.site.register(Wishlist,WishlistAdmin)
 # class CategoryAdmin(admin.ModelAdmin):
 #     list_display=['username','category']
 admin.site.register(Category)
+
+
+admin.site.register(Cart)
+
+admin.site.register(CartItem)
+
+
+# admin.site.register(Address)

@@ -1,0 +1,37 @@
+/* Add this CSS to your stylesheet */
+.cover-background {
+    background-image: url('path/to/your/image.jpg'); /* Replace 'path/to/your/image.jpg' with the path to your desired background image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Set the height to cover the entire viewport */
+}
+
+.content-container {
+    padding: 20px;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    margin: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the opacity as needed */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+button{
+    border-radius: 6px;
+   
+}
+button:hover{
+    background-color: aqua;
+   
+}
+
+.submit.button{
+    border-radius: 6px;
+}

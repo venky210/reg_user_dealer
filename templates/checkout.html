@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Checkout</title>
+
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block block_body %}
+
+<div class="checkout-container">
+    <div class="cart">
+        <h1>Checkout</h1>
+        <table border="3px">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart_item in cart_items %}
+                <tr>
+                    <td><img src="{{cart_item.product.img.url}}" alt="" height="80px" width="80px"></td>
+                    <td>{{ cart_item.product.pname }}</td>
+                    <td>${{ cart_item.product.price }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2"><strong>Total:</strong></td>
+                    <td colspan="2">{{ total_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="user-info">
+        <h1>ShipingAddress</h1>
+        {% if user.is_authenticated %}
+       <h5>Name: {{ user.username }}</h5><br>
+       <h6>Address: {{ user.Address }}</h6><br>
+       <h6>City: {{ user.city }} - {{ user.pincode }}</h6><br>
+       <h6>Mobile_No: {{ user.mobile_no }}</h6>
+        {% endif %}
+
+        <form action="{% url 'Address' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Change Address">
+        </form>
+    </div>
+ 
+</div>
+
+
+
+{% endblock %}

@@ -1,50 +1,47 @@
-/* CSS for Wishlist Page */
+/* Add this to your c9.css file */
 
-/* Wishlist Heading */
-.wishlist-heading {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 30px;
-  }
-  
-  /* Product Cards */
-  .card {
-    border: 1px solid #5f5252;
-    border-radius: 10px;
-  }
-  
-  .card-img-top {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    height: 300px; /* Adjust height as needed */
-    object-fit: 100%; /* Ensure the entire image fits within the card */
-  }
-  
-  .card-body {
-    padding: 20px;
-  }
-  
-  .card-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .card-text {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  .btn-danger {
-    width: 100%;
-  }
-  
-  /* Empty Wishlist Message */
-  .wishlist-empty {
-    text-align: center;
-    font-size: 18px;
-    margin-top: 50px;
-  }
-  body{
-    background-color: antiquewhite;
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url('path_to_your_background_image.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 20px; /* Adjust padding as needed */
+}
+
+.product {
+  background-color: rgba(214, 210, 210, 0.8); /* Adjust the alpha value to control transparency */
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  text-align: center;
+}
+
+.product h1 {
+  color: rgb(10, 10, 10);
+}
+
+.product img {
+  border-radius: 5px;
+}
+
+.product button {
+  background-color: rgb(202, 44, 44);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product button:hover {
+  background-color: #964b00; /* Darken the background color on hover */
+}
+
+
+body{
+  background-color: gray;
 }

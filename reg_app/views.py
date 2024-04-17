@@ -97,26 +97,6 @@ def dealerproductlist(request):
     return render(request,'dealerproductlist.html',{'products':products})
 
 
-# def create_product(request):
-#     if request.method == 'POST':
-#         dataform = ProductCreationForm(request.POST)
-#         if dataform.is_valid():
-#             product = dataform.save(commit=False)
-#             product.dealer = request.user
-#             product.save()
-#             category_id = request.POST.get('category')  # Get category ID from the form
-#             return redirect('dealerproductlist', category_id=category_id)
-#     else:
-#         form = ProductCreationForm()
-#     return render(request, 'create_product.html', {'form': form})
-
-# def dealerproductlist(request, category_id=None):
-#     if category_id:
-#         category = get_object_or_404(Category, id=category_id)
-#         products = product.objects.filter(dealer=request.user, category=category)
-#     else:
-#         products = product.objects.filter(dealer=request.user)
-#     return render(request, 'dealerproductlist.html', {'products': products})
 
 
 def allproducts(request):
@@ -213,8 +193,7 @@ def removewishlistiteam(request,wishlist_id):
     if request.method == 'POST':
             wishlist_item.delete()
             return redirect('wishlist')    
-    return render(request,'removewishlistiteam.html')
-
+    return redirect('allproducts')
 
 
 def change_password(request):
@@ -228,16 +207,19 @@ def change_password(request):
     return render(request,'change_password.html')
 
 
-def profile_edit(request):
+def Edit_profile(request):
     form=profileform()
     user=request.user
     if request.method=='POST':
         form=profileform(request.POST,instance=user)
         if form.is_valid():
             form.save()
-            return HttpResponse('<h1>Profile Edit Successfully....</h1>')
+            return HttpResponse('<h1> Upadte Successfully...</h1>')
 
-    return render(request,'profile_edit.html',{'form':form})
+    return render(request,'Edit_profile.html',{'form':form})
+
+
+
 
 
 
@@ -248,7 +230,8 @@ def category_list(request):
 
 def category_detail(request, category_id):
     category = Category.objects.get(pk=category_id)
-    return render(request, 'category_detail.html', {'category': category})
+    products=product.objects.filter(category=category)
+    return render(request, 'category_detail.html', {'category': category,'products':products})
 
 
 
@@ -296,3 +279,69 @@ def lowtohigh(request):
 def hightolow(request):
     products = product.objects.order_by('-price')
     return render(request, 'sort_by_price.html',{'products':products})
+
+
+#  <--- Add To Cart --->
+
+def Address(request):
+    form= UserAddressForm()
+    user=request.user
+    if request.method=='POST':
+        form= UserAddressForm(request.POST,instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('checkout')
+
+    return render(request,'Address.html',{'form':form})
+
+
+
+
+
+def add_to_cart(request, product_id):
+    product_instance = product.objects.get(pk=product_id) 
+    user_cart, created = Cart.objects.get_or_create(user=request.user)
+    cart_item, created = CartItem.objects.get_or_create(cart=user_cart, product=product_instance) 
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+    
+    return redirect('view_cart')
+
+def view_cart(request):
+    user_cart = Cart.objects.get(user=request.user)
+    cart_items = CartItem.objects.filter(cart=user_cart)
+    total_price = sum(item.product.price * item.quantity for item in cart_items)
+    return render(request, 'cart.html', {'cart_items': cart_items, 'total_price': total_price})
+
+
+def removecart(request, cart_item_id):
+    cart_item = get_object_or_404(CartItem, pk=cart_item_id)
+   
+    cart_item.delete()
+    return redirect('view_cart')
+
+
+
+def checkout(request):
+    user_cart = Cart.objects.get(user=request.user)
+    cart_items = CartItem.objects.filter(cart=user_cart)
+    total_price = sum(item.product.price * item.quantity for item in cart_items)
+    return render(request, 'checkout.html', {'cart_items': cart_items, 'total_price': total_price})
+
+
+   
+# def ShipingAddress(request):
+#     form=ShipingAddressForm()
+#     if request.method=='POST':
+#         form=ShipingAddressForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('viewaddress')
+#     return render(request,'ShipingAddress.html',{'form':form})
+
+# def viewaddress(request):
+#     add=Address.objects.all()
+#     return render(request,'checkout.html',{'add':add})
+
+

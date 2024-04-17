@@ -1,22 +1,97 @@
 {% extends 'base.html' %}
 
+{% load static %}
 
 {% block title %}
-    <title>Create_Category</title>
-    
-   
+    <title>Create Category</title>
+
+
+    <link rel="stylesheet" href="{% static 'css/c13.css' %}">
 {% endblock %}
 
 {% block block_body %}
-<center>
-    <h1>Create_Category</h1>
-    <div>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-       
-        <input type="submit" value="Save">
-    </form>
+<div class="cover-background">
+    <div class="form-container">
+        <div class="form-content">
+            <h1 style="color: brown;">Create Category</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="submit-button">
+                    <input type="submit" value="Save">
+                </div>
+            </form>
+        </div>
     </div>
-    </center>
+</div>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filters
+        </button>  
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{% url 'lowtohigh' %}">Price: Low to High</a>
+            <a class="dropdown-item" href="{% url 'hightolow' %}">Price: High to Low</a>
+            <div class="dropdown-divider"></div>
+            <!-- Category dropdown -->
+            <!-- <div class="dropdown" id="categoryDropdown">
+                <button class="dropdown-item dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Category
+                </button>
+                <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                    <a class="dropdown-item" href="{% url 'category_list' %}">Category</a>
+                   
+                </div>
+            </div>
+            <a class="dropdown-item" href="{% url 'wishlist' %}">Wishlist</a>
+            <input class="form-control mr-2 flex-grow-1" type="search" placeholder="Search products" aria-label="Search" name="query">
+        </div>
+    </div> --> -->
+
+
+
+
+
+
+
+
+
+
+    <!-- <script>
+        // Script to enable dropdown toggling for nested dropdowns
+        $(document).ready(function(){
+            // Toggle the nested dropdown menu when its parent button is clicked
+            $('.dropdown .dropdown-toggle').on('click', function(e) {
+                if (!$(this).next().hasClass('show')) {
+                    $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+                }
+                var $subMenu = $(this).next('.dropdown-menu');
+                $subMenu.toggleClass('show');
+    
+                $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+                    $('.dropdown-submenu .show').removeClass('show');
+                });
+    
+                return false;
+            });
+        });
+    </script>
+     -->

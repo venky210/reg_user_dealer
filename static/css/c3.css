@@ -19,7 +19,7 @@
 /* Style for each product */
 .product {
     width: 300px; /* Adjust the width as needed */
-    background-color: rgba(182, 178, 194, 0.8); /* semi-transparent white background */
+    background-color: rgba(199, 197, 176, 0.8); /* semi-transparent white background */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -85,5 +85,5 @@ button:hover{
     
 }
 body{
-    background-color: azure;
+    background-color:gray;
 }

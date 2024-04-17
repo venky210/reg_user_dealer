@@ -1,0 +1,35 @@
+/* Add this CSS to your stylesheet */
+.cover-background {
+    background-image: url('path/to/your/image.jpg'); /* Replace 'path/to/your/image.jpg' with the path to your desired background image */
+    background-size: cover;
+    background-position:center;
+    height: 260px;
+ 
+} /* Set the height to cover the entire viewport */
+
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+
+.form-content {
+    background-color: rgba(170, 148, 148, 0.8); /* Adjust the opacity as needed */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  
+}
+
+/* Add this CSS to your stylesheet */
+.submit-button {
+    text-align: center;
+    border-radius:10px;
+}
+
+body{
+    background-color: antiquewhite;
+}

@@ -12,9 +12,12 @@
     <h1>Category List</h1>
     <ul>
         {% for category in categories %}
+         
             <li><a href="{% url 'category_detail' category.id %}">{{ category.category }}</a></li>
         {% endfor %}
     </ul>
+    {% if user.admin %}
   <button>  <a href="{% url 'category_create' %}">Create New Category</a></button>
+  {% endif %}
     </center>
 {% endblock %}
