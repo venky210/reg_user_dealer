@@ -1,4 +1,4 @@
-.checkout-container {
+/* .checkout-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -6,15 +6,83 @@
   
   .cart {
     flex: 1;
-    margin-right: 40px;
+    margin-right: 60px;
     
   }
   
   .user-info {
     flex: 1;
     text-align:400px; /* Align user info to the right */
-  }
   
+  
+
+  /* checkout.css */
+
+/* Style for the checkout container */
+.checkout-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Style for the cart section */
+.cart {
+  flex-grow: 1;
+  margin-right: 160px;
+ 
+}
+
+/* Style for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #ccc; /* Add border around the table */
+}
+
+/* Style for table headers */
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2; /* Background color for header */
+}
+
+/* Style for table rows */
+
+/* Style for the user info section */
+.user-info {
+  flex-grow: 1;
+  margin-top: 100px;
+}
+
+/* Style for the address section */
+.user-info h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style for the user details */
+.user-info h5, .user-info h6 {
+  margin: 5px 0;
+}
+
+/* Style for the change address button */
+.user-info form input[type="submit"] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
   
   
   

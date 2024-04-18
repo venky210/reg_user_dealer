@@ -29,8 +29,8 @@
     <form action="{% url 'product_search' %}" method="GET" class="search-bar">
         {% csrf_token %}
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 1200px;">
-                Filters
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filter
             </button>  
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{% url 'lowtohigh' %}">Price: Low to High</a>
@@ -68,6 +68,7 @@
             <h3>price {{ product.price }}</h3>
             
             <h3> Category:{{product.category}}</h3>
+            
            
             <form action="{% url 'addwishlist' product.id %}" method="POST">
                 {% csrf_token %}

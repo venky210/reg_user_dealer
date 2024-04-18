@@ -4,9 +4,8 @@
 
 {% block title %}
     <title>Category Detail</title>
-    
     <link rel="stylesheet" href="{% static 'css/c12.css' %}">
-
+    
 {% endblock %}
 
 {% block block_body %}
@@ -15,13 +14,11 @@
         <center>
             <h1 style="color: brown;">{{ category.category }}</h1>
             {% if user.admin %}
-             
-             <button>   <a href="{% url 'category_update' category.id %}">Update Category</a></button>
-            
+                <button><a href="{% url 'category_update' category.id %}">Update Category</a></button>
                 <form action="{% url 'category_delete' category.id %}" method="POST">
                     {% csrf_token %}
                     <div class="submit-button">
-                    <input type="submit" value="Delete Category">
+                        <input type="submit" value="Delete Category">
                     </div>
                 </form>
             {% endif %}
@@ -30,9 +27,20 @@
             {% for product in products %}
                 <div class="product">
                     <h1>{{ product.pname }}</h1>
-                    <img src="{{ product.img.url }}" alt="" height="200px" width="200px">
-                    <h3>price {{ product.price }}</h3>
+                    <img src="{{ product.img.url }}" alt="" height="200px" width="250px">
+                    <h3>Price: {{ product.price }}</h3>
                     <h3>Category: {{ product.category }}</h3>
+                    {% if user.admin %}
+                        <form action="{% url 'update_product_status' product.id %}" method="POST">
+                            {% csrf_token %}
+                            <select name="status" class="status-dropdown">
+                                <option value="pending" {% if product.status == 'pending' %} selected {% endif %}>Pending</option>
+                                <option value="approved" {% if product.status == 'approved' %} selected {% endif %}>Approved</option>
+                                <option value="rejected" {% if product.status == 'rejected' %} selected {% endif %}>Rejected</option>
+                            </select>
+                            <input type="submit" value="Update Status">
+                        </form>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

@@ -36,6 +36,11 @@ class Category(models.Model):
 
 
 class product(models.Model):
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),)
+    
     
     pname=models.CharField(max_length=100)
     qty=models.IntegerField(default=1)
@@ -43,6 +48,8 @@ class product(models.Model):
     img=models.ImageField()
     dealer=models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank=True)
     category=models.ForeignKey(Category,on_delete=models.CASCADE,null=True,blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
     def __str__(self):
         return self.pname
 

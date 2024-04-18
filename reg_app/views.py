@@ -6,6 +6,7 @@ from reg_app.views import *
 from reg_app.forms import *
 from reg_app.models import *
 from django.contrib.auth import authenticate,login,logout
+from django.urls import reverse
 
 from django.contrib.auth.decorators import login_required
 from django.utils.html import mark_safe
@@ -100,8 +101,10 @@ def dealerproductlist(request):
 
 
 def allproducts(request):
-    products=product.objects.all()
-    return render(request,'allproducts.html',{'products':products})
+    if request.user:
+        products=product.objects.filter(status='approved')
+    
+        return render(request,'allproducts.html',{'products':products})
 
 def product_search(request):
     query = request.GET.get('query')
@@ -299,9 +302,17 @@ def Address(request):
 
 
 def add_to_cart(request, product_id):
-    product_instance = product.objects.get(pk=product_id) 
+    product_instance = product.objects.get(pk=product_id)
+  
     user_cart, created = Cart.objects.get_or_create(user=request.user)
     cart_item, created = CartItem.objects.get_or_create(cart=user_cart, product=product_instance) 
+
+
+    
+    if Wishlist.objects.filter(user=request.user, products=product_instance).exists():
+        wishlist_item = Wishlist.objects.get(user=request.user, products=product_instance)
+        wishlist_item.delete()
+
     if not created:
         cart_item.quantity += 1
         cart_item.save()
@@ -328,6 +339,40 @@ def checkout(request):
     cart_items = CartItem.objects.filter(cart=user_cart)
     total_price = sum(item.product.price * item.quantity for item in cart_items)
     return render(request, 'checkout.html', {'cart_items': cart_items, 'total_price': total_price})
+
+
+
+
+
+def update_product_status(request, product_id):
+    if request.method == 'POST':
+       
+        product_obj = product.objects.get(pk=product_id)
+        
+       
+        new_status = request.POST.get('status')
+        product_obj.status = new_status
+        product_obj.save()
+        
+       
+        return redirect(reverse('category_detail', kwargs={'category_id': product_obj.category_id}))
+    else:
+       
+         return HttpResponse("Method not allowed")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
    

@@ -5,6 +5,8 @@
 
 {% block title %}
     <title>Cart</title>
+
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
 {% endblock %}
 
 {% block block_body %}
@@ -13,7 +15,7 @@
         <div class="cart">
 
             <h1>Cart Details</h1>
-            <table border="3px">
+            <table>
                 <thead>
                     <tr>
                         <th>Image</th>
@@ -31,11 +33,11 @@
                         <td>{{ cart_item.product.pname }}</td>
                         <td>${{ cart_item.product.price }}</td>
                         <td>
-                            <button type="button" class="increment-btn" style="border-radius:50px">+</button>
-                            <span class="quantity">{{ cart_item.product.qty }}</span>
                             <button type="button" class="decrement-btn" style="border-radius:50px">-</button>
+                            <span class="quantity" data-price="{{ cart_item.product.price }}">{{ cart_item.product.qty }}</span>
+                            <button type="button" class="increment-btn" style="border-radius:50px">+</button>
                         </td>
-                        <td>${{ cart_item.product.price|floatformat:"2" }}</td>
+                        <td class="item-total">${{ cart_item.product.price|floatformat:"2" }}</td>
                         <td>
                             <form action="{% url 'removecart' cart_item.id %}" method="POST">
                                 {% csrf_token %}
@@ -46,7 +48,7 @@
                     {% endfor %}
                     <tr>
                         <td colspan="4"><strong>Total:</strong></td>
-                        <td>{{ total_price }}</td>
+                        <td id="total-price">{{ total_price }}</td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -58,13 +60,14 @@
         <input type="submit" value="Checkout">
     </form>
    
+   
 
     </center>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var incrementButtons = document.querySelectorAll(".increment-btn");
             var decrementButtons = document.querySelectorAll(".decrement-btn");
-        
+    
             incrementButtons.forEach(function(button) {
                 button.addEventListener("click", function() {
                     var quantityElement = this.parentNode.querySelector(".quantity");
@@ -73,9 +76,10 @@
                     quantityElement.textContent = qty + 1;
                     updateItemTotal(this.parentNode.parentNode, price);
                     updateTotalPrice();
+                    saveCartState(); // Save the updated cart state
                 });
             });
-        
+    
             decrementButtons.forEach(function(button) {
                 button.addEventListener("click", function() {
                     var quantityElement = this.parentNode.querySelector(".quantity");
@@ -85,17 +89,18 @@
                         quantityElement.textContent = qty - 1;
                         updateItemTotal(this.parentNode.parentNode, -price);
                         updateTotalPrice();
+                        saveCartState(); // Save the updated cart state
                     }
                 });
             });
-
+    
             function updateItemTotal(row, price) {
                 var itemTotalElement = row.querySelector(".item-total");
                 var currentTotal = parseFloat(itemTotalElement.textContent.replace("$", ""));
                 var newTotal = currentTotal + price;
                 itemTotalElement.textContent = "$" + newTotal.toFixed(2);
             }
-
+    
             function updateTotalPrice() {
                 var itemTotalElements = document.querySelectorAll(".item-total");
                 var totalPrice = 0;
@@ -103,11 +108,32 @@
                     totalPrice += parseFloat(element.textContent.replace("$", ""));
                 });
                 document.getElementById("total-price").textContent = "$" + totalPrice.toFixed(2);
+                localStorage.setItem("totalPrice", totalPrice.toFixed(2)); // Save the updated total price in localStorage
+            }
+    
+            // Restore the total price from localStorage when the page loads
+            function restoreTotalPrice() {
+                var totalPrice = localStorage.getItem("totalPrice");
+                if (totalPrice) {
+                    document.getElementById("total-price").textContent = "$" + totalPrice;
+                }
+            }
+    
+            restoreTotalPrice(); // Call the function to restore total price when the page loads
+    
+            // Function to save the updated cart state
+            function saveCartState() {
+                var cartState = {};
+                var cartItems = document.querySelectorAll(".cart-item");
+                cartItems.forEach(function(item) {
+                    var productId = item.getAttribute("data-product-id");
+                    var quantity = parseInt(item.querySelector(".quantity").textContent);
+                    cartState[productId] = quantity;
+                });
+                localStorage.setItem("cartState", JSON.stringify(cartState));
             }
         });
     </script>
-
-   
-      
+    
    
 {% endblock %}

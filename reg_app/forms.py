@@ -18,7 +18,7 @@ class ProductCreationForm(forms.ModelForm):
 class UpdateCreationForm(forms.ModelForm):
     class Meta:
         model=product
-        fields=['pname','qty','price']
+        fields=['pname','qty','price','img','category']
 
 
 

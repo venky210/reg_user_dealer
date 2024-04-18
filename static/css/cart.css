@@ -1,0 +1,67 @@
+/* cart.css */
+
+/* Style for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px; /* Add some space below the table */
+}
+
+/* Style for table headers */
+th {
+    background-color: #f2f2f2; /* Background color for header */
+    padding: 12px; /* Add padding for better readability */
+    text-align: left;
+}
+
+/* Style for table rows */
+
+/* Style for table cells */
+td {
+    padding: 12px; /* Add padding for better readability */
+}
+
+/* Style for the checkout button */
+.checkout-container {
+    margin-top: 20px; /* Add some space above the checkout button */
+}
+
+.checkout-button {
+    background-color: #4CAF50;
+    border: none;
+    color: rgb(223, 40, 40);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Style for quantity buttons */
+.increment-btn,
+.decrement-btn {
+    background-color: #ccc;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 4px;
+    cursor: pointer;
+    border-radius: 50%;
+    outline: none;
+}
+
+/* Style for quantity */
+.quantity {
+    padding: 4px 8px;
+    font-weight: bold;
+}
+body{
+    background-color: rgb(241, 248, 248);
+}

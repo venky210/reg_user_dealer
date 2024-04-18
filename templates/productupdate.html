@@ -10,11 +10,12 @@
 
 {% block block_body %}
 <center>
-    <h1 style="background-color: antiquewhite;">Update_Product</h1>
+    <h1 style="color: brown;">Update_Product</h1>
     <form action="" method="POST">
         {% csrf_token %}
         
         {{products.as_p}}
+       
         <input type="submit" value="Update">
     </form>
 </center>

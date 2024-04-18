@@ -6,7 +6,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Registration/',Registration,name='Registration'),
-    path('',homepage,name='homepage'),
+    path('homepage/',homepage,name='homepage'),
     path('loginpage/',loginpage,name='loginpage'),
   
     path('logoutpage/',logoutpage,name='logoutpage'),
@@ -17,10 +17,11 @@ urlpatterns = [
     path('addwishlist/<int:product_id>/',addwishlist,name='addwishlist'),
   
     path('wishlist/',wishlist,name='wishlist'),
-    path('allproducts/',allproducts,name='allproducts'),
+    path('',allproducts,name='allproducts'),
     path('removewishlistiteam/<int:wishlist_id>/',removewishlistiteam,name='removewishlistiteam'),
     path('product_search/',product_search,name='product_search'),
     path('change_password/',change_password,name='change_password'),
+    path('Edit_profile/',Edit_profile,name='Edit_profile'),
    
 
     path('categories/', category_list, name='category_list'),
@@ -40,6 +41,8 @@ urlpatterns = [
     path('view_cart/', view_cart, name='view_cart'),
     path('checkout/',checkout,name='checkout'),
     path('removecart/<int:cart_item_id>/',removecart, name='removecart'),
+
+    path('update_product_status/<int:product_id>/', update_product_status, name='update_product_status'),
     # path('ShipingAddress/',ShipingAddress,name='ShipingAddress'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 

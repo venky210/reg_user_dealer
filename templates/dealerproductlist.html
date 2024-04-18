@@ -25,6 +25,7 @@
    <br><br>
    <h3>price {{product.price}}</h3>
    <h3>category:{{product.category}}</h3>
+   <h3>status:{{product.status}}</h3>
    
  <button>  <a href="{% url 'updateproduct' product.id %}" class="nav-link">UpdateProduct</a></button>
  <form method="post" action="{% url 'deleteproduct' product.id %}">
